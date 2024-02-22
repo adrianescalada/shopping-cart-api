@@ -20,7 +20,7 @@ final class GetAllUsersController
     public function __invoke(Request $request)
     {
         $getAllUserUseCase = new GetAllUserUseCase($this->repository);
-        $users           = $getAllUserUseCase->__invoke();
+        $users = $getAllUserUseCase->__invoke();
 
         return $users;
     }

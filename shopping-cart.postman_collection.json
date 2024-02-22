@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "05c3a594-124f-4184-9648-0b76b752accc",
+		"name": "shopping-cart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1950570"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GetUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8079/api/user/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"user",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8079/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Adrian Escalada\",\n    \"email\" : \"adrianescalada4@gmail.com\",\n    \"password\" : \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8079/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Adrian Escalada\",\n    \"email\" : \"adrianescalada4@gmail.com\",\n    \"password\" : \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8079/api/user/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Carlos Adrian Escalada Camarda\",\n    \"email\" : \"adrianescalada@gmail.com\",\n    \"password\" : \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8079/api/user/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"user",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "GetProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8079/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\" : \"A1234\",\n    \"name\" : \"Notebook\",\n    \"price\" : 33.50,\n    \"quantity\" : 2,\n    \"description\": \"notebook mac 15'\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8079/api/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\" : \"123\",\n    \"name\" : \"Carlos Adrian Escalada Camarda\",\n    \"price\" : 55,\n    \"quantity\" : 12,\n    \"description\" : \"Hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8079/api/product/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"product",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Adrian Escalada\",\n    \"email\" : \"adrianescalada4@gmail.com\",\n    \"password\" : \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8079/api/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8079/api/product/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"product",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

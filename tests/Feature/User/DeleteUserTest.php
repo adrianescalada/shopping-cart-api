@@ -4,8 +4,8 @@ namespace Tests\Feature\User;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+
 use Tests\TestCase;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DeleteUserTest extends TestCase
 {

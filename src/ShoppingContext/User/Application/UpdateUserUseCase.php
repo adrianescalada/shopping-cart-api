@@ -30,8 +30,7 @@ final class UpdateUserUseCase
         ?DateTime $userEmailVerifiedDate,
         string $userPassword,
         ?string $userRememberToken
-    ): void
-    {
+    ): void {
         $id                = new UserId($userId);
         $name              = new UserName($userName);
         $email             = new UserEmail($userEmail);

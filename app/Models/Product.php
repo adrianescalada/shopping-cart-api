@@ -10,15 +10,21 @@ class Product extends Model
     protected  $connection = 'mysql';
     use HasFactory;
 
+    protected $casts = [
+        'price' => 'float',
+        'quantity' => 'int',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
+        'code',
         'name',
-        'quantity',
         'price',
+        'quantity',
         'description',
     ];
 }

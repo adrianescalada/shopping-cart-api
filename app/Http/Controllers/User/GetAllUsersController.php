@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Src\ShoppingContext\User\Infrastructure\GetAllUsersController as GetAllUsersInfrastructure;
 use App\Http\Controllers\Controller;
 
-class GetUsersController extends Controller
+class GetAllUsersController extends Controller
 {
     /**
      * @var GetAllUsersInfrastructure

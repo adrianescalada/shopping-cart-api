@@ -62,6 +62,8 @@ class Handler extends ExceptionHandler
             return response()->json(['message' => "Not found", "code" => JsonResponse::HTTP_NOT_FOUND], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        return response()->json(['message' => $exception->getMessage(), "code" => $exception->getCode()], $exception->getCode());
+        $code = $exception->getCode() ? $exception->getCode() : JsonResponse::HTTP_INTERNAL_SERVER_ERROR;
+
+        return response()->json(['message' => $exception->getMessage(), "code" => $code], $code);
     }
 }

@@ -14,7 +14,6 @@ use Src\ShoppingContext\User\Domain\ValueObjects\UserName;
 use Src\ShoppingContext\User\Domain\ValueObjects\UserPassword;
 use Src\ShoppingContext\User\Domain\ValueObjects\UserRememberToken;
 use Src\ShoppingContext\User\Infrastructure\Repositories\Exceptions\DuplicateEmailException;
-use Symfony\Component\HttpFoundation\Response;
 
 final class EloquentUserRepository implements UserRepositoryContract
 {
