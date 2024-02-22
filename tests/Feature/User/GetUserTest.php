@@ -1,26 +1,26 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\User;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-class UpdateUserTest extends TestCase
+class GetUserTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function a_user_is_updated()
+    public function a_created_user_is_retrieved()
     {
-        $user = User::factory()->create();
+        $this->withoutExceptionHandling();
 
-        $this->putJson("/api/user/$user->id", [
-            'data' => [
-                'name' => 'Name Surname',
-                'email' => 'name.surname@email.com'
-            ]
-        ])->assertStatus(200);
+        User::factory()->create();
+
+        $this->assertCount(1, User::all());
+
+        $user = User::first();
 
         $this->json('GET', "/api/user/$user->id")
             ->assertStatus(200)

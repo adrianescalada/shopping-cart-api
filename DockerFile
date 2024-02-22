@@ -21,6 +21,10 @@ RUN docker-php-ext-configure intl && \
     intl \
     zip
 
+# Instala Xdebug
+RUN pecl install xdebug && \
+    docker-php-ext-enable xdebug
+
 # Instala y habilita la extensión MongoDB para PHP
 RUN pecl install mongodb && \
     docker-php-ext-enable mongodb
