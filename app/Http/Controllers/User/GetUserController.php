@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Resources\UserResource;
+use App\Http\Controllers\Resources\User\User as UserResource;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\User\Infrastructure\GetUserController as GetUserInfrastructure;
+use App\Http\Controllers\Controller;
 
 class GetUserController extends Controller
 {

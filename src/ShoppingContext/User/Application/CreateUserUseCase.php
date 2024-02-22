@@ -28,8 +28,7 @@ final class CreateUserUseCase
         ?DateTime $userEmailVerifiedDate,
         string $userPassword,
         ?string $userRememberToken
-    ): void
-    {
+    ): void {
         $name              = new UserName($userName);
         $email             = new UserEmail($userEmail);
         $emailVerifiedDate = new UserEmailVerifiedDate($userEmailVerifiedDate);
@@ -37,7 +36,6 @@ final class CreateUserUseCase
         $rememberToken     = new UserRememberToken($userRememberToken);
 
         $user = User::create($name, $email, $emailVerifiedDate, $password, $rememberToken);
-
         $this->repository->save($user);
     }
 }

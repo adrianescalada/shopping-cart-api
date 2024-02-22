@@ -52,16 +52,16 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof RequestException) {
             Log::error(JsonResponse::HTTP_INTERNAL_SERVER_ERROR . ' ' . $exception);
-            return response()->json(['message' => 'External API call failed.'], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->json(['message' => "External API call failed", "code" => JsonResponse::HTTP_INTERNAL_SERVER_ERROR], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
         if ($exception instanceof AuthenticationException) {
-            return response()->json(['message' => 'Unauthenticated.'], JsonResponse::HTTP_UNAUTHORIZED);
+            return response()->json(['message' => "Unauthenticated", "code" => JsonResponse::HTTP_UNAUTHORIZED], JsonResponse::HTTP_UNAUTHORIZED);
         }
         if ($exception instanceof ModelNotFoundException) {
             Log::debug(JsonResponse::HTTP_NOT_FOUND . ' ' . $exception);
-            return response()->json(['message' => "not found"], JsonResponse::HTTP_NOT_FOUND);
+            return response()->json(['message' => "Not found", "code" => JsonResponse::HTTP_NOT_FOUND], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        return $this->prepareJsonResponse($request, $exception);
+        return response()->json(['message' => $exception->getMessage(), "code" => $exception->getCode()], $exception->getCode());
     }
 }

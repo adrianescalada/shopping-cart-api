@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Resources;
+namespace App\Http\Controllers\Resources\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class User extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +19,6 @@ class UserResource extends JsonResource
             'data' => [
                 'name' => $this->name()->value(),
                 'email' => $this->email()->value(),
-                'emailVerifiedDate' => $this->emailVerifiedDate()->value(),
             ]
         ];
     }

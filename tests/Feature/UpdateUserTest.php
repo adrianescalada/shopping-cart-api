@@ -13,7 +13,7 @@ class UpdateUserTest extends TestCase
     /** @test */
     public function a_user_is_updated()
     {
-        $user = User::factory()->create(['email_verified_at' => null]);
+        $user = User::factory()->create();
 
         $this->putJson("/api/user/$user->id", [
             'data' => [
@@ -28,7 +28,6 @@ class UpdateUserTest extends TestCase
                 'data' => [
                     'name' => $user->name,
                     'email' => $user->email,
-                    'emailVerifiedDate' => $user->email_verified_at
                 ]
             ]);
     }

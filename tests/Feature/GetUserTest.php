@@ -16,7 +16,7 @@ class GetUserTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        User::factory()->create(['email_verified_at' => null]);
+        User::factory()->create();
 
         $this->assertCount(1, User::all());
 
@@ -28,7 +28,6 @@ class GetUserTest extends TestCase
                 'data' => [
                     'name' => $user->name,
                     'email' => $user->email,
-                    'emailVerifiedDate' => $user->email_verified_at
                 ]
             ]);
     }

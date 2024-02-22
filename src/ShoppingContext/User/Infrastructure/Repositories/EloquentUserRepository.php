@@ -13,6 +13,8 @@ use Src\ShoppingContext\User\Domain\ValueObjects\UserId;
 use Src\ShoppingContext\User\Domain\ValueObjects\UserName;
 use Src\ShoppingContext\User\Domain\ValueObjects\UserPassword;
 use Src\ShoppingContext\User\Domain\ValueObjects\UserRememberToken;
+use Src\ShoppingContext\User\Infrastructure\Repositories\Exceptions\DuplicateEmailException;
+use Symfony\Component\HttpFoundation\Response;
 
 final class EloquentUserRepository implements UserRepositoryContract
 {
@@ -21,6 +23,13 @@ final class EloquentUserRepository implements UserRepositoryContract
     public function __construct()
     {
         $this->eloquentUserModel = new EloquentUserModel;
+    }
+
+    public function all(): array
+    {
+        $users = $this->eloquentUserModel->get()->toArray();
+
+        return $users;
     }
 
     public function find(UserId $id): ?User
@@ -65,9 +74,23 @@ final class EloquentUserRepository implements UserRepositoryContract
             'remember_token'    => $user->rememberToken()->value(),
         ];
 
+        $userExist = $newUser
+            ->where('email', $user->email()->value())
+            ->first();
+
+        if ($userExist) {
+            throw new DuplicateEmailException($user->email()->value());
+        }
+
         $newUser->create($data);
     }
 
+    /**
+     * @param UserId $id
+     * @param User $user
+     * @return void
+     * @throws DuplicateEmailException
+     */
     public function update(UserId $id, User $user): void
     {
         $userToUpdate = $this->eloquentUserModel;
@@ -76,6 +99,15 @@ final class EloquentUserRepository implements UserRepositoryContract
             'name'  => $user->name()->value(),
             'email' => $user->email()->value(),
         ];
+
+        $userExist = $userToUpdate
+            ->where('id', "<>", $id->value())
+            ->where('email', $user->email()->value())
+            ->first();
+
+        if ($userExist) {
+            throw new DuplicateEmailException($user->email()->value());
+        }
 
         $userToUpdate
             ->findOrFail($id->value())

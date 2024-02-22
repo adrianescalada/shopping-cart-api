@@ -12,6 +12,8 @@ use Src\ShoppingContext\User\Domain\ValueObjects\UserName;
 
 interface UserRepositoryContract
 {
+    public function all(): array;
+
     public function find(UserId $id): ?User;
 
     public function findByCriteria(UserName $userName, UserEmail $userEmail): ?User;

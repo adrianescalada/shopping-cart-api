@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use Src\ShoppingContext\User\Infrastructure\DeleteUserController as DeleteUserInfrastructure;
+use App\Http\Controllers\Controller;
 
 class DeleteUserController extends Controller
 {

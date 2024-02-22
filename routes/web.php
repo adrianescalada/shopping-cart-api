@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    echo phpinfo();
+    return response()->json([
+        'message' => "shopping cart api"
+    ]);
 });
