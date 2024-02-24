@@ -14,14 +14,11 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "laravelcollective/html": "^6.4",
-        "mongodb/laravel-mongodb": "^4.0.0"
+        "mongodb/laravel-mongodb": "^4.0.0",
+        "predis/predis": "^2.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.0",
-        "laravel/sail": "^1.18",
-        "laravel/ui": "^4.4",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.1",

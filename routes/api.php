@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 #Users
 use App\Http\Controllers\User\GetAllUsersController;
@@ -16,6 +15,12 @@ use App\Http\Controllers\Product\CreateProductController;
 use App\Http\Controllers\Product\UpdateProductController;
 use App\Http\Controllers\Product\DeleteProductController;
 
+#Cart
+use App\Http\Controllers\Cart\GetCartController;
+use App\Http\Controllers\Cart\AddItemCartController;
+use App\Http\Controllers\Cart\UpdateCartController;
+use App\Http\Controllers\Cart\DeleteCartController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,18 +35,29 @@ use App\Http\Controllers\Product\DeleteProductController;
 
 #users
 Route::get('users', GetAllUsersController::class);
-Route::get('user/{id}', GetUserController::class);
-Route::post('user', CreateUserController::class);
-Route::put('user/{id}', UpdateUserController::class);
-Route::delete('user/{id}', DeleteUserController::class);
+Route::prefix('user')->group(function () {
+    Route::get('/{id}', GetUserController::class);
+    Route::post('/', CreateUserController::class);
+    Route::put('/{id}', UpdateUserController::class);
+    Route::delete('/{id}', DeleteUserController::class);
+});
 
 #products
 Route::get('products', GetAllProductsController::class);
-Route::get('product/{id}', GetProductController::class);
-Route::post('product', CreateProductController::class);
-Route::put('product/{id}', UpdateProductController::class);
-Route::delete('product/{id}', DeleteProductController::class);
+Route::prefix('product')->group(function () {
+    Route::get('/{id}', GetProductController::class);
+    Route::post('/', CreateProductController::class);
+    Route::put('/{id}', UpdateProductController::class);
+    Route::delete('/{id}', DeleteProductController::class);
+});
 
+#cart
+Route::prefix('cart')->group(function () {
+    Route::get('/{id}', GetCartController::class);
+    Route::post('/add', AddItemCartController::class);
+    Route::put('/{id}', UpdateCartController::class);
+    Route::delete('/{id}', DeleteCartController::class);
+});
 
 Route::get('/test', function () {
     echo phpinfo();

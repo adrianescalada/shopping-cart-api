@@ -15,11 +15,11 @@ interface ProductRepositoryContract
 
     public function find(ProductId $id): ?Product;
 
-    public function findByCriteria(ProductCode $code, ProductName $ProductName): ?Product;
+    public function findByCriteria(ProductCode $productCode, ProductName $ProductName): ?Product;
 
-    public function save(Product $user): void;
+    public function save(Product $product): ProductId;
 
-    public function update(ProductId $userId, Product $user): void;
+    public function update(ProductId $productId, Product $product): void;
 
     public function delete(ProductId $id): void;
 }

@@ -12,6 +12,7 @@ RUN apt-get update && \
     libicu-dev \
     libzip-dev \
     nodejs npm \
+    redis-server \
     && rm -rf /var/lib/apt/lists/*
 
 # Instala y habilita las extensiones de PHP necesarias para laravel
@@ -20,6 +21,13 @@ RUN docker-php-ext-configure intl && \
     pdo_mysql \
     intl \
     zip
+
+# Instala la extensión de PHP para Redis
+RUN pecl install redis \
+    && docker-php-ext-enable redis
+
+# Agrega la configuración para la extensión de Redis en php.ini
+RUN echo "extension=redis.so" >> /usr/local/etc/php/php.ini
 
 # Instala Xdebug
 RUN pecl install xdebug && \

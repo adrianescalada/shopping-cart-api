@@ -17,6 +17,7 @@ class Product extends JsonResource
         // Map Domain Product model values
         return [
             'data' => [
+                'id' => $this->id()->value(),
                 'code' => $this->code()->value(),
                 'name' => $this->name()->value(),
                 'price' => $this->price()->value(),

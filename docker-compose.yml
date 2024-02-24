@@ -39,9 +39,6 @@ services:
     container_name: laravel_redis
     ports:
       - "6379:6379"
-    environment:
-      - REDIS_PASSWORD=laravel
-      - REDIS_PORT=6379
     networks:
       - laravel_network
   phpmyadmin:

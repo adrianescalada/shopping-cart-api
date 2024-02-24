@@ -6,7 +6,7 @@ namespace src\ShoppingContext\Product\Infrastructure;
 
 use Illuminate\Http\Request;
 use Src\ShoppingContext\Product\Application\CreateProductUseCase;
-use Src\ShoppingContext\Product\Application\GetProductByCriteriaUseCase;
+use Src\ShoppingContext\Product\Application\GetProductUseCase;
 use Src\ShoppingContext\Product\Infrastructure\Repositories\EloquentProductRepository;
 
 final class CreateProductController
@@ -28,17 +28,16 @@ final class CreateProductController
 
         $createProductUseCase = new CreateProductUseCase($this->repository);
 
-        $createProductUseCase->__invoke(
+        $getProductUseCase = new GetProductUseCase($this->repository);
+
+        $newProductId = $createProductUseCase->__invoke(
             $productCode,
             $productName,
             $productPrice,
             $productQuantity,
             $productDescription,
         );
-
-        $getProductByCriteriaUseCase = new GetProductByCriteriaUseCase($this->repository);
-        $newProduct                  = $getProductByCriteriaUseCase->__invoke($productCode, $productName);
-
+        $newProduct = $getProductUseCase->__invoke($newProductId->value());
         return $newProduct;
     }
 }

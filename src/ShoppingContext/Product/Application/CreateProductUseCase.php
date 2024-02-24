@@ -6,6 +6,7 @@ namespace Src\ShoppingContext\Product\Application;
 
 use Src\ShoppingContext\Product\Domain\Contracts\ProductRepositoryContract;
 use Src\ShoppingContext\Product\Domain\Product;
+use Src\ShoppingContext\Product\Domain\ValueObjects\ProductId;
 use Src\ShoppingContext\Product\Domain\ValueObjects\ProductCode;
 use Src\ShoppingContext\Product\Domain\ValueObjects\ProductName;
 use Src\ShoppingContext\Product\Domain\ValueObjects\ProductPrice;
@@ -27,13 +28,15 @@ final class CreateProductUseCase
         float $productPrice,
         int $quantity,
         ?string $description,
-    ): void {
+    ): ProductId {
         $productCode       = new ProductCode($productCode);
         $productName       = new ProductName($productName);
         $productPrice      = new ProductPrice($productPrice);
         $quantity          = new ProductQuantity($quantity);
         $description       = new ProductDescription($description);
         $product = Product::create($productCode, $productName, $productPrice, $quantity, $description);
-        $this->repository->save($product);
+        $productId = $this->repository->save($product);
+
+        return $productId;
     }
 }

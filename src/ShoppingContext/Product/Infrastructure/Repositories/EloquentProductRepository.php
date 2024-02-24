@@ -14,6 +14,7 @@ use Src\ShoppingContext\Product\Domain\ValueObjects\ProductPrice;
 use Src\ShoppingContext\Product\Domain\ValueObjects\ProductQuantity;
 use Src\ShoppingContext\Product\Domain\ValueObjects\ProductDescription;
 use Src\ShoppingContext\Product\Infrastructure\Repositories\Exceptions\DuplicateCodeException;
+use Illuminate\Support\Facades\Redis;
 
 final class EloquentProductRepository implements ProductRepositoryContract
 {
@@ -26,7 +27,16 @@ final class EloquentProductRepository implements ProductRepositoryContract
 
     public function all(): array
     {
-        return $this->eloquentProductModel->get()->toArray();
+        $products = Redis::get('products');
+
+        if (!$products) {
+            $products = $this->eloquentProductModel->get()->toArray();
+            Redis::setex('products', 600, json_encode($products));
+        } else {
+            $products = json_decode($products, true);
+        }
+
+        return $products;
     }
 
     public function find(ProductId $id): ?Product
@@ -34,6 +44,7 @@ final class EloquentProductRepository implements ProductRepositoryContract
         $product = $this->eloquentProductModel->findOrFail($id->value());
         // Return Domain Product model
         return new Product(
+            new ProductId($product->id),
             new ProductCode($product->code),
             new ProductName($product->name),
             new ProductPrice($product->price),
@@ -51,6 +62,7 @@ final class EloquentProductRepository implements ProductRepositoryContract
 
         // Return Domain Product model
         return new Product(
+            new ProductId($product->id),
             new ProductCode($product->code),
             new ProductName($product->name),
             new ProductPrice($product->price),
@@ -59,7 +71,7 @@ final class EloquentProductRepository implements ProductRepositoryContract
         );
     }
 
-    public function save(Product $product): void
+    public function save(Product $product): ProductId
     {
         $newProduct = $this->eloquentProductModel;
 
@@ -79,7 +91,10 @@ final class EloquentProductRepository implements ProductRepositoryContract
             throw new DuplicateCodeException($product->code()->value());
         }
 
-        $newProduct->create($data);
+        $productModel = $newProduct->create($data);
+        $productId = new ProductId($productModel->id);
+
+        return $productId;
     }
 
     /**

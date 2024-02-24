@@ -28,7 +28,6 @@ class CreateProductController extends Controller
     public function __invoke(Request $request)
     {
         $newProduct = new ProductResource($this->createProductController->__invoke($request));
-
         return response($newProduct, 201);
     }
 }
