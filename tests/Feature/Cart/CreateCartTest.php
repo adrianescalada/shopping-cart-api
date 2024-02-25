@@ -44,7 +44,7 @@ class CreateCartTest extends TestCase
         $cart = Cart::first();
 
         $responseFind = $this->json('GET', "/api/cart/$cart->id")
-            ->assertStatus(201);
+            ->assertStatus(200);
 
         $responseData = $responseFind->decodeResponseJson();
         $this->assertEquals($cart->id, $responseData['data']['id']);

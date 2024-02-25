@@ -6,6 +6,7 @@ use App\Http\Controllers\Resources\User\User as UserResource;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\User\Infrastructure\CreateUserController as CreateUserInfrastructure;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class CreateUserController extends Controller
 {
@@ -29,6 +30,6 @@ class CreateUserController extends Controller
     {
         $newUser = new UserResource($this->createUserController->__invoke($request));
 
-        return response($newUser, 201);
+        return response($newUser, Response::HTTP_CREATED);
     }
 }

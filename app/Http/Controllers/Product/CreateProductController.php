@@ -6,6 +6,7 @@ use App\Http\Controllers\Resources\Product\Product as ProductResource;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\Product\Infrastructure\CreateProductController as CreateProductInfrastructure;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class CreateProductController extends Controller
 {
@@ -28,6 +29,6 @@ class CreateProductController extends Controller
     public function __invoke(Request $request)
     {
         $newProduct = new ProductResource($this->createProductController->__invoke($request));
-        return response($newProduct, 201);
+        return response($newProduct, Response::HTTP_CREATED);
     }
 }

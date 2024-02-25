@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\User\Infrastructure\DeleteUserController as DeleteUserInfrastructure;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class DeleteUserController extends Controller
 {
@@ -28,6 +29,6 @@ class DeleteUserController extends Controller
     {
         $this->deleteUserController->__invoke($request);
 
-        return response([], 204);
+        return response([], Response::HTTP_NO_CONTENT);
     }
 }

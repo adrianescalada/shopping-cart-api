@@ -6,6 +6,7 @@ use App\Http\Controllers\Resources\Cart\Cart as CartResource;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\Cart\Infrastructure\AddItemCartController as AddItemCartInfrastructure;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class AddItemCartController extends Controller
 {
@@ -29,6 +30,6 @@ class AddItemCartController extends Controller
     {
         $addCart = new CartResource($this->addItemCartController->__invoke($request));
 
-        return response($addCart, 201);
+        return response($addCart, Response::HTTP_CREATED);
     }
 }

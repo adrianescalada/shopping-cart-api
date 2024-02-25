@@ -25,6 +25,10 @@ final class EloquentProductRepository implements ProductRepositoryContract
         $this->eloquentProductModel = new EloquentProductModel;
     }
 
+
+    /**
+     * @return Product
+     */
     public function all(): array
     {
         $products = Redis::get('products');
@@ -39,10 +43,14 @@ final class EloquentProductRepository implements ProductRepositoryContract
         return $products;
     }
 
+    /**
+     * @param ProductId $id
+     * @return Product
+     */
     public function find(ProductId $id): ?Product
     {
         $product = $this->eloquentProductModel->findOrFail($id->value());
-        // Return Domain Product model
+
         return new Product(
             new ProductId($product->id),
             new ProductCode($product->code),
@@ -53,6 +61,11 @@ final class EloquentProductRepository implements ProductRepositoryContract
         );
     }
 
+    /**
+     * @param ProductCode $code
+     * @param ProductName $name
+     * @return Product
+     */
     public function findByCriteria(ProductCode $code, ProductName $name): ?Product
     {
         $product = $this->eloquentProductModel
@@ -60,7 +73,6 @@ final class EloquentProductRepository implements ProductRepositoryContract
             ->where('name', $name->value())
             ->firstOrFail();
 
-        // Return Domain Product model
         return new Product(
             new ProductId($product->id),
             new ProductCode($product->code),
@@ -71,6 +83,10 @@ final class EloquentProductRepository implements ProductRepositoryContract
         );
     }
 
+    /**
+     * @param Product $product
+     * @return ProductId
+     */
     public function save(Product $product): ProductId
     {
         $newProduct = $this->eloquentProductModel;

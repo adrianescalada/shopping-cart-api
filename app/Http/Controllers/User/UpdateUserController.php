@@ -6,6 +6,7 @@ use App\Http\Controllers\Resources\User\User as UserResource;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\User\Infrastructure\UpdateUserController as UpdateUserInfrastructure;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class UpdateUserController extends Controller
 {
@@ -29,6 +30,6 @@ class UpdateUserController extends Controller
     {
         $updatedUser = new UserResource($this->updateUserController->__invoke($request));
 
-        return response($updatedUser, 200);
+        return response($updatedUser, Response::HTTP_OK);
     }
 }

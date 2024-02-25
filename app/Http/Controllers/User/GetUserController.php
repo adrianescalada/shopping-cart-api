@@ -6,6 +6,7 @@ use App\Http\Controllers\Resources\User\User as UserResource;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\User\Infrastructure\GetUserController as GetUserInfrastructure;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class GetUserController extends Controller
 {
@@ -29,6 +30,6 @@ class GetUserController extends Controller
     {
         $user = new UserResource($this->getUserController->__invoke($request));
 
-        return response($user, 200);
+        return response($user, Response::HTTP_OK);
     }
 }

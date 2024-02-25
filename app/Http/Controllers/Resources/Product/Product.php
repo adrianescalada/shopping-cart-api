@@ -14,7 +14,6 @@ class Product extends JsonResource
      */
     public function toArray($request)
     {
-        // Map Domain Product model values
         return [
             'data' => [
                 'id' => $this->id()->value(),

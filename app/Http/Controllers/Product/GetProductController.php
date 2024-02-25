@@ -6,6 +6,7 @@ use App\Http\Controllers\Resources\Product\Product as ProductResource;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\Product\Infrastructure\GetProductController as GetProductInfrastructure;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class GetProductController extends Controller
 {
@@ -29,6 +30,6 @@ class GetProductController extends Controller
     {
         $product = new ProductResource($this->getProductController->__invoke($request));
 
-        return response($product, 200);
+        return response($product, Response::HTTP_OK);
     }
 }

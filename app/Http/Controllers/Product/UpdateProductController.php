@@ -6,6 +6,7 @@ use App\Http\Controllers\Resources\Product\Product as ProductResource;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\Product\Infrastructure\UpdateProductController as UpdateProductInfrastructure;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class UpdateProductController extends Controller
 {
@@ -29,6 +30,6 @@ class UpdateProductController extends Controller
     {
         $updatedProduct = new ProductResource($this->updateProductController->__invoke($request));
 
-        return response($updatedProduct, 200);
+        return response($updatedProduct, Response::HTTP_OK);
     }
 }

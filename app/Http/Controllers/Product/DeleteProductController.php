@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Product;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\Product\Infrastructure\DeleteProductController as DeleteProductInfrastructure;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class DeleteProductController extends Controller
 {
@@ -28,6 +29,6 @@ class DeleteProductController extends Controller
     {
         $this->deleteProductController->__invoke($request);
 
-        return response([], 204);
+        return response([], Response::HTTP_NO_CONTENT);
     }
 }

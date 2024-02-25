@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cart;
 use Illuminate\Http\Request;
 use Src\ShoppingContext\Cart\Infrastructure\DeleteCartController as DeleteCartInfrastructure;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class DeleteCartController extends Controller
 {
@@ -28,6 +29,6 @@ class DeleteCartController extends Controller
     {
         $this->deleteCartController->__invoke($request);
 
-        return response([], 204);
+        return response([], Response::HTTP_NO_CONTENT);
     }
 }
