@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Src\ShoppingContext\Cart\Infrastructure\Repositories;
 
 use App\Models\Cart as EloquentCartModel;
@@ -10,10 +12,11 @@ use Src\ShoppingContext\Cart\Domain\ValueObjects\CartStatus;
 use Src\ShoppingContext\Cart\Domain\Contracts\CartRepositoryContract;
 use Illuminate\Support\Facades\DB;
 use Src\ShoppingContext\Cart\Domain\Enums\CartStatus as CartStatusEnum;
-use Src\ShoppingContext\Cart\Infrastructure\Repositories\Exceptions\CartException;
+use Src\ShoppingContext\Cart\Domain\Exceptions\CartException;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\MassAssignmentException;
+use Src\ShoppingContext\Cart\Infrastructure\Common\Exceptions\ExceptionHandler;
 
 class EloquentCartRepository implements CartRepositoryContract
 {
@@ -76,7 +79,8 @@ class EloquentCartRepository implements CartRepositoryContract
             DB::commit();
             return $cartId;
         } catch (\Exception $exception) {
-            $this->handleException($exception);
+            DB::rollback();
+            ExceptionHandler::handle($exception);
         }
     }
 
@@ -90,6 +94,7 @@ class EloquentCartRepository implements CartRepositoryContract
             if (CartStatusEnum::ACTIVE !== $cart->status) {
                 throw new CartException("The cart status is $cart->status, no changes can be made", Response::HTTP_FORBIDDEN);
             }
+
             $cartId = new CartId($cart->id);
 
             $this->cartItemRepository->removeItemsNotPresentInRequest($cartId, $cartItemsData);
@@ -99,7 +104,8 @@ class EloquentCartRepository implements CartRepositoryContract
 
             return $cartId;
         } catch (\Exception $exception) {
-            $this->handleException($exception);
+            DB::rollback();
+            ExceptionHandler::handle($exception);
         }
     }
 
@@ -120,17 +126,5 @@ class EloquentCartRepository implements CartRepositoryContract
             $errorCode = $exception->getCode();
             throw new CartException("$errorMessage", $errorCode);
         }
-    }
-
-    private function handleException(\Exception $exception): void
-    {
-        DB::rollback();
-        $errorMessage = $exception->getMessage();
-        $errorCode = $exception->getCode();
-        if (strpos($exception->getMessage(), 'Integrity constraint violation') !== false) {
-            $errorMessage = "Integrity constraint violation";
-            throw new CartException("$errorMessage", Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-        throw new CartException("$errorMessage", $errorCode);
     }
 }

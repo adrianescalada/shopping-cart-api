@@ -8,19 +8,25 @@ use Illuminate\Http\Request;
 use Src\ShoppingContext\Cart\Application\AddItemCartUseCase;
 use Src\ShoppingContext\Cart\Application\GetCartUseCase;
 use Src\ShoppingContext\Cart\Infrastructure\Repositories\EloquentCartRepository;
+use Src\ShoppingContext\Cart\Application\Validations\ValidateCartItemDataUseCase;
 
 final class AddItemCartController
 {
     private $repository;
 
-    public function __construct(EloquentCartRepository $repository)
+    private $validateCartItemDataUseCase;
+
+    public function __construct(EloquentCartRepository $repository,  ValidateCartItemDataUseCase $ValidateCartItemDataUseCase)
     {
         $this->repository = $repository;
+        $this->validateCartItemDataUseCase = $ValidateCartItemDataUseCase;
     }
 
     public function __invoke(Request $request)
     {
-        $cartItems  = $request->input('items');
+        $cartItems  = $request->input('products');
+
+        $this->validateCartItemDataUseCase->validate($cartItems);
 
         $addItemCartUseCase = new AddItemCartUseCase($this->repository);
 

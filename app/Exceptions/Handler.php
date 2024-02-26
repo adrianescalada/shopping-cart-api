@@ -63,7 +63,6 @@ class Handler extends ExceptionHandler
         }
 
         $code = $exception->getCode() ? $exception->getCode() : JsonResponse::HTTP_INTERNAL_SERVER_ERROR;
-        //dd($exception);
         return response()->json(['message' => $exception->getMessage(), "code" => $code], $code);
     }
 }

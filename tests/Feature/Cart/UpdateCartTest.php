@@ -65,10 +65,10 @@ class UpdateCartTest extends TestCase
     private function dataCart(int $productId): array
     {
         return [
-            'items' => [
+            'products' => [
                 $productId => [
                     "quantity" => 2,
-                    "price" => 100.00
+                    "price" => 10.99
                 ]
             ]
         ];
@@ -77,7 +77,7 @@ class UpdateCartTest extends TestCase
     private function updatedDataCart(int $productId): array
     {
         return [
-            'items' => [
+            'products' => [
                 $productId => [
                     "quantity" => 5,
                     "price" => 10.55

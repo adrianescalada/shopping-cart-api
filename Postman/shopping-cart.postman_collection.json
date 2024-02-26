@@ -286,7 +286,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": {\n        \"16\": {\n            \"quantity\": 2,\n            \"price\": 10.00\n        },\n        \"12\": {\n            \"quantity\": 1,\n            \"price\": 5.99\n        },\n        \"17\": {\n            \"quantity\": 3,\n            \"price\": 8.50\n        }\n    }\n}",
+							"raw": "{\n    \"products\": {\n        \"16\": {\n            \"quantity\": 2,\n            \"price\": 10.00\n        },\n        \"12\": {\n            \"quantity\": 1,\n            \"price\": 5.99\n        },\n        \"17\": {\n            \"quantity\": 3,\n            \"price\": 8.50\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -316,7 +316,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": {\n        \"16\": {\n            \"quantity\": 7,\n            \"price\": 7.00\n        },\n        \"12\": {\n            \"quantity\": 7,\n            \"price\": 7.00\n        },\n        \"17\": {\n            \"quantity\": 7,\n            \"price\": 7.00\n        }\n    }\n}",
+							"raw": "{\n    \"products\": {\n        \"16\": {\n            \"quantity\": 7,\n            \"price\": 7.00\n        },\n        \"12\": {\n            \"quantity\": 7,\n            \"price\": 7.00\n        },\n        \"17\": {\n            \"quantity\": 7,\n            \"price\": 7.00\n        }\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -324,7 +324,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8079/api/cart/17",
+							"raw": "http://localhost:8079/api/cart/21",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -333,7 +333,7 @@
 							"path": [
 								"api",
 								"cart",
-								"17"
+								"21"
 							]
 						}
 					},
@@ -345,7 +345,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8079/api/cart/1",
+							"raw": "http://localhost:8079/api/cart/54",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -354,7 +354,7 @@
 							"path": [
 								"api",
 								"cart",
-								"1"
+								"54"
 							]
 						}
 					},
@@ -384,6 +384,63 @@
 							"path": [
 								"api",
 								"cart",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Confirm Purchase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customer\": {\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n    },\n    \"products\": {\n        \"16\": {\n            \"quantity\": 7,\n            \"price\": 7.00\n        },\n        \"12\": {\n            \"quantity\": 7,\n            \"price\": 7.00\n        },\n        \"17\": {\n            \"quantity\": 7,\n            \"price\": 7.00\n        }\n    },\n    \"total_amount\": 42.48,\n    \"payment\": {\n        \"method\": \"credit_card\",\n        \"transaction_id\": \"TRANS123456789\",\n        \"status\": \"completed\"\n    },\n    \"shipping_address\": {\n        \"address_line1\": \"123 Main St\",\n        \"city\": \"Anytown\",\n        \"state\": \"NY\",\n        \"postal_code\": \"12345\",\n        \"country\": \"USA\"\n    },\n    \"billing_address\": {\n        \"address_line1\": \"123 Billing St\",\n        \"city\": \"Anytown\",\n        \"state\": \"NY\",\n        \"postal_code\": \"12345\",\n        \"country\": \"USA\"\n    },\n    \"links\": {\n        \"order_detail\": \"/api/orders/ORD123456\",\n        \"confirmation_page\": \"/order/confirmation\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8079/api/order/25/confirm-purchase",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"order",
+								"25",
+								"confirm-purchase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetOrderById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8079/api/order/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8079",
+							"path": [
+								"api",
+								"order",
 								"1"
 							]
 						}

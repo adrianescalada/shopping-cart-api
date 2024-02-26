@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Cart;
+namespace Tests\Feature\Order;
 
 use App\Models\Cart;
 use App\Models\Product;
@@ -9,12 +9,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Src\ShoppingContext\Product\Domain\ValueObjects\ProductId;
 use Tests\TestCase;
 
-class CreateCartTest extends TestCase
+class CreateOrderTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function test_create_cart_with_product()
+    public function test_create_confirm_purchase()
     {
         $response = $this->postJson('/api/product', $this->dataProduct())
             ->assertStatus(201);
@@ -46,15 +46,10 @@ class CreateCartTest extends TestCase
         $responseFind = $this->json('GET', "/api/cart/$cart->id")
             ->assertStatus(200);
 
-        $responseData = $responseFind->decodeResponseJson();
-        $this->assertEquals($cart->id, $responseData['data']['id']);
-        $this->assertEquals(null, $responseData['data']['userId']);
-        $this->assertEquals('active', $responseData['data']['status']);
+        $orderId = $responseFind->json('data.id');
 
-        $this->assertCount(1, $responseData['data']['items']);
-        $this->assertEquals(1, $responseData['data']['items'][0][0]['id']);
-        $this->assertEquals(2, $responseData['data']['items'][0][0]['quantity']);
-        $this->assertEquals(10.99, $responseData['data']['items'][0][0]['price']);
+        $response = $this->postJson("/api/order/$orderId/confirm-purchase", $this->dataConfirmPurchase($productId))
+            ->assertStatus(200);
     }
 
     private function dataProduct(): array
@@ -96,6 +91,46 @@ class CreateCartTest extends TestCase
                     "quantity" => 2,
                     "price" => 10.99
                 ]
+            ]
+        ];
+    }
+
+    private function dataConfirmPurchase(int $productId): array
+    {
+        return  [
+            "customer" => [
+                "name" => "John Doe",
+                "email" => "johndoe@example.com"
+            ],
+            "products" => [
+                $productId => [
+                    "quantity" => 7,
+                    "price" => 7.99
+                ],
+            ],
+            "total_amount" => 42.48,
+            "payment" => [
+                "method" => "credit_card",
+                "transaction_id" => "TRANS123456789",
+                "status" => "completed"
+            ],
+            "shipping_address" => [
+                "address_line1" => "123 Main St",
+                "city" => "Anytown",
+                "state" => "NY",
+                "postal_code" => "12345",
+                "country" => "USA"
+            ],
+            "billing_address" => [
+                "address_line1" => "123 Billing St",
+                "city" => "Anytown",
+                "state" => "NY",
+                "postal_code" => "12345",
+                "country" => "USA"
+            ],
+            "links" => [
+                "order_detail" => "/api/orders/ORD123456",
+                "confirmation_page" => "/order/confirmation"
             ]
         ];
     }

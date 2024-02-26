@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\ShoppingContext\Cart\Infrastructure\Repositories\Exceptions;
+namespace Src\ShoppingContext\Cart\Domain\Exceptions;
 
 use App\Exceptions\ShoppingCartException;
 

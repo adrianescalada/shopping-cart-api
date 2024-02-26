@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Src\ShoppingContext\Cart\Domain;
+namespace Src\ShoppingContext\Cart\Application\Validations;
 
+use Symfony\Component\HttpFoundation\Response;
 use Src\ShoppingContext\Cart\Domain\Exceptions\CartItemsException;
-use Src\ShoppingContext\Cart\Domain\CartItemData as CartItemValueObject;
 
-class CartItemData
+class ValidateCartItemDataUseCase
 {
-    private array $items;
-
-    public function __construct(array $items)
+    public function validate(array $data): void
     {
-        foreach ($items as $productId => $item) {
+
+        foreach ($data as $productId => $item) {
             if (!is_array($item)) {
                 throw new CartItemsException("Items", "array", "$productId");
             }
@@ -26,12 +25,5 @@ class CartItemData
                 throw new CartItemsException("Price", "float", "$productId");
             }
         }
-
-        $this->items = $items;
-    }
-
-    public function getItems(): array
-    {
-        return $this->items;
     }
 }

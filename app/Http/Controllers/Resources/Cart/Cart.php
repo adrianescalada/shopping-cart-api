@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Resources\Cart;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Controllers\Resources\Product\Product as ProductResource;
 
 class Cart extends JsonResource
 {
@@ -35,7 +36,13 @@ class Cart extends JsonResource
                         ];
                     })->toArray();
                 })->toArray(),
-
+                /* TODO: review
+                    'products' => collect($this->items)->map(function ($cartItems) {
+                        return collect($cartItems)->map(function ($item) {
+                            return $item->products;
+                        });
+                    }),
+                */
             ]
         ];
     }

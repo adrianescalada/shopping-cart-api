@@ -21,6 +21,9 @@ use App\Http\Controllers\Cart\AddItemCartController;
 use App\Http\Controllers\Cart\UpdateCartController;
 use App\Http\Controllers\Cart\DeleteCartController;
 
+#Order
+use App\Http\Controllers\Order\GetOrderController;
+use App\Http\Controllers\Order\ConfirmPurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +60,12 @@ Route::prefix('cart')->group(function () {
     Route::post('/add', AddItemCartController::class);
     Route::put('/{id}', UpdateCartController::class);
     Route::delete('/{id}', DeleteCartController::class);
+});
+
+#order
+Route::prefix('order')->group(function () {
+    Route::get('/{id}', GetOrderController::class);
+    Route::post('/{id}/confirm-purchase', ConfirmPurchaseController::class);
 });
 
 Route::get('/test', function () {
