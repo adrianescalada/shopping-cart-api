@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace src\ShoppingContext\Order\Infrastructure;
 
 use Illuminate\Http\Request;
-use Src\ShoppingContext\Cart\Application\ConfirmPurchaseUseCase;
+use Src\ShoppingContext\Order\Application\ConfirmPurchaseUseCase;
 use Src\ShoppingContext\Order\Application\CreateOrderUseCase;
 use Src\ShoppingContext\Order\Infrastructure\Repositories\EloquentOrderRepository;
 use Src\ShoppingContext\Cart\Application\Validations\ValidatePurchaseDataUseCase;

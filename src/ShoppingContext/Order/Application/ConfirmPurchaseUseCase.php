@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Src\ShoppingContext\Cart\Application;
+namespace Src\ShoppingContext\Order\Application;
 
 use Src\ShoppingContext\Order\Domain\Contracts\OrderRepositoryContract;
 use Src\ShoppingContext\Order\Domain\ValueObjects\OrderId;
