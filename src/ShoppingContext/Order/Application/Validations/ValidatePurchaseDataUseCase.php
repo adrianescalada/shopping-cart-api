@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Src\ShoppingContext\Cart\Application\Validations;
+namespace Src\ShoppingContext\Order\Application\Validations;
 
 use Src\ShoppingContext\Cart\Domain\Exceptions\CartException;
 use Symfony\Component\HttpFoundation\Response;

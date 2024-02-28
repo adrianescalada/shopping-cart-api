@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Src\ShoppingContext\Order\Application\ConfirmPurchaseUseCase;
 use Src\ShoppingContext\Order\Application\CreateOrderUseCase;
 use Src\ShoppingContext\Order\Infrastructure\Repositories\EloquentOrderRepository;
-use Src\ShoppingContext\Cart\Application\Validations\ValidatePurchaseDataUseCase;
+use Src\ShoppingContext\Order\Application\Validations\ValidatePurchaseDataUseCase;
 
 final class ConfirmPurchaseCartController
 {
